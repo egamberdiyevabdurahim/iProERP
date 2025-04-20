@@ -394,7 +394,7 @@ async def register_gadget2_end_ms(message: types.Message, data):
               f"<b>Mijoz ismi</b>: {client_name}\n"\
               f"<b>Mijoz nomeri</b>: {client_phone_number}\n"
 
-    await message.answer(text=f"{data.get('name')} - Muvaffaqiyatli registratsiya buldi!")
+    await message.answer(text=f"{name} - Muvaffaqiyatli registratsiya buldi!")
     medias = []
     for media in images:
         medias.append(InputMediaPhoto(media=media))
