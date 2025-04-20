@@ -4,6 +4,7 @@ from buttons.admin import started_work_adm_kb, menu_adm_kb, others_adm_kb
 from buttons.super import main_kb_su
 from filters.role import RoleFilter
 from loader import DailyReportWorker, Gadget
+from roles.admin.change_price_hl import change_price_gadgets_cl
 from roles.admin.continue_adm_hl import continue_cl
 
 from roles.admin.my_jobs_adm_hl import my_jobs_cl
@@ -108,3 +109,6 @@ async def page_callback(call: types.CallbackQuery):
 
     elif type_data == "get-job":
         await get_work_cl(call=call, page=int(page))
+
+    elif type_data == "get-job+2":
+        await change_price_gadgets_cl(call=call, page=int(page))

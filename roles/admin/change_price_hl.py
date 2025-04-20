@@ -25,7 +25,7 @@ async def get_worker_name(worker_idn: int) -> str:
 
 
 @router.callback_query(F.data.startswith('change_price_'), RoleFilter([1, 2, 3]))
-async def get_work_cl(
+async def change_price_gadgets_cl(
         call: types.CallbackQuery,
         page=1,
         page_size=1

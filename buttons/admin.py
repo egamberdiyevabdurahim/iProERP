@@ -265,7 +265,7 @@ async def get_job_adm_kb(
         navigation_buttons.append(
             InlineKeyboardButton(
                 text="⬅️",
-                callback_data=f"page_{page - 1}_get-job"
+                callback_data=f"page_{page - 1}_get-job{''if not change else '+2'}"
             )
         )
     navigation_buttons.append(
@@ -279,7 +279,7 @@ async def get_job_adm_kb(
         navigation_buttons.append(
             InlineKeyboardButton(
                 text="➡️",
-                callback_data=f"page_{page + 1}_get-job"
+                callback_data=f"page_{page + 1}_get-job{''if not change else '+2'}"
             )
         )
 
