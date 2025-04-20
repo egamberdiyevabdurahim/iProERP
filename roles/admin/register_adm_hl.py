@@ -348,13 +348,13 @@ async def register_gadget2_end_ms(message: types.Message, data):
         if len(i) > 1:
             d[i[0]] = i[-1]
     name = d.get('Nomi')
-    description = data.get("Qo'shimcha")
-    price = data.get('Narx')
-    imei1 = data.get('IMEI1')
-    imei2 = data.get('IMEI2')
-    serial_number = data.get('S/N')
-    client_name = data.get('Mijoz ismi')
-    client_phone_number = data.get('Mijoz raqami')
+    description = d.get("Qo'shimcha")
+    price = d.get('Narx')
+    imei1 = d.get('IMEI1')
+    imei2 = d.get('IMEI2')
+    serial_number = d.get('S/N')
+    client_name = d.get('Mijoz ismi')
+    client_phone_number = d.get('Mijoz raqami')
 
     model = data.get('model')
     images = data.get('images')
