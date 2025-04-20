@@ -63,7 +63,7 @@ async def change_price_gadgets_cl(
             f"<b>Mijoz</b>: {gadget.client_name}\n"
             f"<b>Telefon raqam</b>: {gadget.client_phone_number}\n"
             f"<b>Narxi</b>: {gadget.price}\n"
-            f"<b>Yana</b>: {gadget.description[:33]}...")
+            f"<b>Yana</b>: {gadget.description[:33]}...\n")
         if worker:
             text_data += f"<b>Ishchi</b>: {gadget.worker}\n"
         counter -= 1
