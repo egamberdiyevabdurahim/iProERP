@@ -260,17 +260,17 @@ async def register_gadget2_model_ms(message: types.Message, state: FSMContext):
              "Lekin IMEI 1 ta bo'lsaham kiritilishi kerak. Mijoz ismi kiritilmasaham bo'ladi, "
              "Mijoz raqami kiritilmasaham bo'ladi. Lekin ikkovisidan 1 ni kiritish kerak. "
              "Forma o'zgarmasin va textda ^ - shu belgidan FOYDALANILMASIN!\n\n")
-    await message.answer(text=text1)
+    await message.answer(text=text1, reply_markup=ReplyKeyboardRemove())
     text = """
-    Nomi^
-    Mijoz ismi^
-    Mijoz raqami^
-    IMEI1^
-    IMEI2^
-    S/N^
-    Narx^
-    Qo'shimcha^
-    """
+Nomi^
+Mijoz ismi^
+Mijoz raqami^
+IMEI1^
+IMEI2^
+S/N^
+Narx^
+Qo'shimcha^
+"""
     await message.answer(text=text, parse_mode='HTML')
     await state.set_state(RegisterGadget2State.full)
 
@@ -288,16 +288,16 @@ async def register_gadget2_new_model_ms(message: types.Message, state: FSMContex
              "Lekin IMEI 1 ta bo'lsaham kiritilishi kerak. Mijoz ismi kiritilmasaham bo'ladi, "
              "Mijoz raqami kiritilmasaham bo'ladi. Lekin ikkovisidan 1 ni kiritish kerak. "
              "Forma o'zgarmasin va textda ^ - shu belgidan FOYDALANILMASIN!\n\n")
-    await message.answer(text=text1)
+    await message.answer(text=text1, reply_markup=ReplyKeyboardRemove())
     text = """
-    Nomi^
-    Mijoz ismi^
-    Mijoz raqami^
-    IMEI1^
-    IMEI2^
-    S/N^
-    Narx^
-    Qo'shimcha^
+Nomi^
+Mijoz ismi^
+Mijoz raqami^
+IMEI1^
+IMEI2^
+S/N^
+Narx^
+Qo'shimcha^
     """
     await message.answer(text=text, parse_mode='HTML')
     await state.set_state(RegisterGadget2State.full)
