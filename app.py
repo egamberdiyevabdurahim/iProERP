@@ -8,7 +8,7 @@ from aiogram.fsm.context import FSMContext
 from roles.admin import (
     continue_adm_hl, detailed_adm_hl, get_job_adm_hl, lose_adm_hl, main_adm_hl,
     my_jobs_adm_hl, not_works_adm_hl, register_adm_hl, stop_adm_hl,
-    take_new_job_adm_hl, works_adm_hl, change_price_adm_hl, find_gadget
+    take_new_job_adm_hl, works_adm_hl, change_price_adm_hl, find_gadget, change_price_hl
 )
 from roles.super import (
     main_super_hl, user_mg_adm_hl, gadget_mg_adm_hl
@@ -52,6 +52,7 @@ async def main():
         works_adm_hl.router,
         change_price_adm_hl.router,
         find_gadget.router,
+        change_price_hl.router,
     )
     # dp.update.outer_middleware(middleware=ErrorLoggingMiddleware())
     # dp.update.middleware(middleware=SubscriptionMiddleware())

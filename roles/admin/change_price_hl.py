@@ -2,13 +2,29 @@ from aiogram import types, Router, F
 
 from buttons.admin import get_job_adm_kb
 from filters.role import RoleFilter
-from loader import Gadget, Model
+from loader import Gadget, Model, User
 from utils.validator import vld
 
 router = Router()
 
 
-@router.callback_query(F.data.startswith('get_work_'), RoleFilter([1,2]))
+def get_status_text(status: int) -> str:
+    return {
+        0: 'Kutilmoqda 🔹',
+        1: 'Jarayonda ♻️',
+        2: 'Tuzatildi ✅',
+        3: 'Oxshamadi ❌'
+    }.get(status, 'Nomaʼlum')
+
+
+async def get_worker_name(worker_idn: int) -> str:
+    if not worker_idn:
+        return ''
+    user = await User.get_by_idn(idn=worker_idn)
+    return f"{user.first_name} {user.last_name or ''}"
+
+
+@router.callback_query(F.data.startswith('change_price_'), RoleFilter([1, 2, 3]))
 async def get_work_cl(
         call: types.CallbackQuery,
         page=1,
@@ -17,13 +33,12 @@ async def get_work_cl(
     u = await vld(o=call, u=call.from_user)
 
     start_index = (page - 1) * page_size
+
     gadgets = await Gadget.get_all(
-        ex="AND status = 0",
         st=start_index,
         lt=page_size
     ) or []
     total_gadgets = await Gadget.get_all_count(
-        ex=f"AND status = 0",
         st=start_index,
         lt=page_size
     )
@@ -37,9 +52,13 @@ async def get_work_cl(
 
     counter = end_index
     for gadget in current_gadgets:
+        status = get_status_text(gadget.status)
         model = await Model.get_data(gadget.model)
+        worker = None
+        if gadget.status != 1:
+            worker = await get_worker_name(gadget.worker)
         text_data += (
-            f"<b>{counter}).</b>\n"
+            f"<b>{counter}). -- {status}</b>\n"
             f"<b>ID</b>: {gadget.idn}\n"
             f"<b>Model</b>: {model.name}\n"
             f"<b>Nomi</b>: {gadget.name}\n"
@@ -48,6 +67,8 @@ async def get_work_cl(
             f"<b>Telefon raqam</b>: {gadget.client_phone_number}\n"
             f"<b>Narxi</b>: {gadget.price}\n"
             f"<b>Yana</b>: {gadget.description[:33]}...")
+        if worker:
+            text_data += f"<b>Ishchi</b>: {gadget.worker}\n"
         counter -= 1
 
     try:
@@ -58,7 +79,8 @@ async def get_work_cl(
                                          page_size=page_size,
                                          u=u,
                                          total_pages=total_pages,
-                                         current_gadgets=current_gadgets
+                                         current_gadgets=current_gadgets,
+                                         change=True,
                                      ))
 
     except Exception:

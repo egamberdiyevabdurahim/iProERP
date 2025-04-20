@@ -26,7 +26,7 @@ async def started_work_adm_kb(u: User):
                 InlineKeyboardButton(text="🪪 Ro'yxatga olish - 2", callback_data="register_gadget2")
             ],
             [
-                InlineKeyboardButton(text="📦 Ishlar", callback_data="get_work_1")
+                InlineKeyboardButton(text="📦 Ishlar", callback_data="change_price_1")
             ],
             [
                 InlineKeyboardButton(text="📚 Boshqalar", callback_data="others")
@@ -68,6 +68,9 @@ async def started_work_adm_kb(u: User):
             ],
             [
                 InlineKeyboardButton(text="📦 Yangi ish olish", callback_data="get_work_1")
+            ],
+            [
+                InlineKeyboardButton(text="📦 Narxni o'zgartirish", callback_data="change_price_1")
             ],
             [
                 InlineKeyboardButton(text="📚 Boshqalar", callback_data="others")
@@ -228,13 +231,14 @@ async def get_job_adm_kb(
         u,
         total_pages,
         current_gadgets,
+        change=False,
         page=1,
         page_size=10
 ):
     markup = InlineKeyboardBuilder()
 
     for gadget in current_gadgets:
-        if u.role not in [2,3]:
+        if not change:
             markup.add(
                 InlineKeyboardButton(
                     text=f"Ishni olish 🖇",
@@ -247,7 +251,7 @@ async def get_job_adm_kb(
                 callback_data=f"detailed_{gadget.idn}+get_work_1"
             )
         )
-        if u.role in [2,3]:
+        if change:
             markup.add(
                 InlineKeyboardButton(
                     text=f"Narxini o'zgartirish 🔁",
