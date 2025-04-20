@@ -38,10 +38,7 @@ async def change_price_gadgets_cl(
         st=start_index,
         lt=page_size
     ) or []
-    total_gadgets = await Gadget.get_all_count(
-        st=start_index,
-        lt=page_size
-    )
+    total_gadgets = await Gadget.get_all_count()
     page_size = int(page_size)
     total_pages = (total_gadgets + page_size - 1) // page_size
     page = int(page)

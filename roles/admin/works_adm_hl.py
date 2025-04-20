@@ -33,19 +33,20 @@ async def expense_m(
     st_data = await state.get_data()
     idn = st_data.get('idn')
     expense = message.text.strip()
-    if not expense.isnumeric():
+    if expense == "O'tkazib yuborish":
+        expense = None
+
+    elif not expense.isnumeric():
         await message.answer(text="Xarajat xato!", reply_markup=ReplyKeyboardRemove())
         await state.clear()
         return
 
-    if expense == "O'tkazib yuborish":
-        expense = None
-
-    await Gadget.column_updater(
-        idn=idn,
-        col_name='expense',
-        data=expense
-    )
+    if expense:
+        await Gadget.column_updater(
+            idn=idn,
+            col_name='expense',
+            data=expense
+        )
 
     await Gadget.column_updater(
         idn=idn,

@@ -261,11 +261,6 @@ class GadgetModel:
         SELECT COUNT(idn) as counter FROM {await cls.get_table_name()}
         WHERE 1=1 {ex}
         """
-        if lt:
-            query += f" LIMIT {lt}"
-
-        if st is not None:
-            query += f" OFFSET {st}"
         result = await execute_query(query, fetch='one')
         return result[-1]
 
