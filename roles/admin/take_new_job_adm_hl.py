@@ -8,7 +8,7 @@ from utils.validator import vld
 router = Router()
 
 
-@router.callback_query(F.data.startswith('get_work_'), RoleFilter([1,2]))
+@router.callback_query(F.data.startswith('get_work_'), RoleFilter([1,2,3]))
 async def get_work_cl(
         call: types.CallbackQuery,
         page=1,

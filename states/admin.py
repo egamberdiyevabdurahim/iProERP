@@ -19,6 +19,14 @@ class RegisterGadgetState(StatesGroup):
     end = State()
 
 
+class RegisterGadget2State(StatesGroup):
+    model = State()
+    new_model = State()
+    full = State()
+    images = State()
+    end = State()
+
+
 class RegisterSt(StatesGroup):
     chat_id = State()
     role = State()

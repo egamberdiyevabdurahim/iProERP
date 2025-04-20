@@ -19,7 +19,6 @@ async def start_work_cl(call: types.CallbackQuery | types.Message, u = None):
     if u is None:
         u = call.from_user
     u = await vld(o=call, u=u)
-    print(u)
     await DailyReportWorker.create(user_id=u.idn)
     datas = await Gadget.get_all(
         ex=f'AND worker={u.idn} AND is_stopped is True AND auto_run is True',
@@ -73,7 +72,7 @@ async def end_work_cl(call: types.CallbackQuery):
 @router.callback_query(F.data=='super_kb', RoleFilter(roles=[2]))
 async def super_kb(call: types.CallbackQuery):
     await call.answer()
-    u = await vld(o=call, u=call.from_user)
+    await vld(o=call, u=call.from_user)
 
     try:
         await call.message.edit_text(text='⚙️ Super', reply_markup=await main_kb_su())
@@ -83,7 +82,7 @@ async def super_kb(call: types.CallbackQuery):
     return
 
 
-@router.callback_query(F.data=='others', RoleFilter(roles=[2]))
+@router.callback_query(F.data=='others', RoleFilter(roles=[1,2,3]))
 async def others_cl(call: types.CallbackQuery):
     await call.answer()
     u = await vld(o=call, u=call.from_user)
@@ -99,7 +98,7 @@ async def others_cl(call: types.CallbackQuery):
 @router.callback_query(F.data.startswith("page_"))
 async def page_callback(call: types.CallbackQuery):
     await call.answer()
-    u = await vld(o=call, u=call.from_user)
+    await vld(o=call, u=call.from_user)
 
     page = call.data.split("_")[1]
     type_data = call.data.split("_")[2]

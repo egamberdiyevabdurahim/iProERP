@@ -11,7 +11,7 @@ from utils.validator import vld
 router = Router()
 
 
-@router.callback_query(F.data.startswith('search_by_'), RoleFilter([2]))
+@router.callback_query(F.data.startswith('search_by_'), RoleFilter([1,2,3]))
 async def search_by_cl(
         call: types.CallbackQuery,
         state: FSMContext

@@ -23,6 +23,15 @@ async def started_work_adm_kb(u: User):
                 InlineKeyboardButton(text="🪪 Ro'yxatga olish", callback_data="register_gadget")
             ],
             [
+                InlineKeyboardButton(text="🪪 Ro'yxatga olish - 2", callback_data="register_gadget2")
+            ],
+            [
+                InlineKeyboardButton(text="📦 Ishlar", callback_data="get_work_1")
+            ],
+            [
+                InlineKeyboardButton(text="📚 Boshqalar", callback_data="others")
+            ],
+            [
                 InlineKeyboardButton(text="💤 Ish kunini tugatish", callback_data="end_work")
             ]
         ])
@@ -50,6 +59,9 @@ async def started_work_adm_kb(u: User):
             ],
             [
                 InlineKeyboardButton(text="🪪 Ro'yxatga olish", callback_data="register_gadget")
+            ],
+            [
+                InlineKeyboardButton(text="🪪 Ro'yxatga olish - 2", callback_data="register_gadget2")
             ],
             [
                 InlineKeyboardButton(text="📑 Ishlarim", callback_data="unfinished_works_of_mine_1")
@@ -180,10 +192,6 @@ async def get_my_jobs_adm_kb(
                 InlineKeyboardButton(
                     text=f"To'xtatish 🤚",
                     callback_data=f"stop_{gadget.idn}"
-                ),
-                InlineKeyboardButton(
-                    text=f"Narxini o'zgartirish 🔁",
-                    callback_data=f"change-price_{gadget.idn}"
                 )
             )
 
@@ -226,20 +234,28 @@ async def get_job_adm_kb(
     markup = InlineKeyboardBuilder()
 
     for gadget in current_gadgets:
-        markup.add(
-            InlineKeyboardButton(
-                text=f"Ishni olish 🖇",
-                callback_data=f"get-job_{gadget.idn}"
+        if u.role not in [2,3]:
+            markup.add(
+                InlineKeyboardButton(
+                    text=f"Ishni olish 🖇",
+                    callback_data=f"get-job_{gadget.idn}"
+                )
             )
-        )
         markup.add(
             InlineKeyboardButton(
                 text=f"Batafsil ℹ️",
                 callback_data=f"detailed_{gadget.idn}+get_work_1"
             )
         )
+        if u.role in [2,3]:
+            markup.add(
+                InlineKeyboardButton(
+                    text=f"Narxini o'zgartirish 🔁",
+                    callback_data=f"change-price_{gadget.idn}"
+                )
+            )
 
-    markup.adjust(1)
+    markup.adjust(1,2)
     navigation_buttons = []
     if page > 1:
         navigation_buttons.append(
@@ -278,6 +294,7 @@ async def model_adm_kb():
     kb.adjust(2)
     kb.add(KeyboardButton(text="Bo'shqa"))
     return kb.as_markup(resize_keyboard=True)
+
 
 async def color_adm_kb():
     kb = InlineKeyboardMarkup(inline_keyboard=[

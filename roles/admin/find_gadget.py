@@ -5,6 +5,7 @@ from aiogram.fsm.context import FSMContext
 
 from buttons.admin import gadget_search_idn_data_kb, gadget_search_sn_data_kb, gadget_search_imei1_data_kb, \
     gadget_search_imei2_data_kb, gadget_search_name_data_kb
+from filters.role import RoleFilter
 from loader import Gadget, Model
 from states.admin import FindGadgetBySt
 from utils.validator import vld
@@ -12,7 +13,7 @@ from utils.validator import vld
 router = Router()
 
 
-@router.callback_query(F.data == "gadget_from_name")
+@router.callback_query(F.data == "gadget_from_name", RoleFilter([1,2,3]))
 async def find_gadget_by_name_cl(call: types.CallbackQuery, state: FSMContext):
     await vld(o=call, u=call.from_user)
     await call.message.edit_text("Gatgetni Nomini kiriting:")
@@ -76,7 +77,7 @@ async def find_gadget_by_name_m(message: types.Message,
                              ), parse_mode='HTML')
 
 
-@router.callback_query(F.data == "gadget_from_idn")
+@router.callback_query(F.data == "gadget_from_idn", RoleFilter([1,2,3]))
 async def find_gadget_by_idn_cl(call: types.CallbackQuery, state: FSMContext):
     await vld(o=call, u=call.from_user)
     await call.message.edit_text("Gatgetni ID-ni kiriting:")
@@ -139,7 +140,7 @@ async def find_gadget_by_idn_m(message: types.Message,
                              ), parse_mode='HTML')
 
 
-@router.callback_query(F.data == "gadget_from_sn")
+@router.callback_query(F.data == "gadget_from_sn", RoleFilter([1,2,3]))
 async def find_gadget_by_sn_cl(call: types.CallbackQuery, state: FSMContext):
     await vld(o=call, u=call.from_user)
     await call.message.edit_text("Gatgetni S/N-sini kiriting:")
@@ -202,7 +203,7 @@ async def find_gadget_by_sn_m(message: types.Message,
                              ), parse_mode='HTML')
 
 
-@router.callback_query(F.data == "gadget_from_imei1")
+@router.callback_query(F.data == "gadget_from_imei1", RoleFilter([1,2,3]))
 async def find_gadget_by_imei1_cl(call: types.CallbackQuery, state: FSMContext):
     await vld(o=call, u=call.from_user)
     await call.message.edit_text("Gatgetni IMEI1-ni kiriting:")
@@ -265,7 +266,7 @@ async def find_gadget_by_imei1_m(message: types.Message,
                              ), parse_mode='HTML')
 
 
-@router.callback_query(F.data == "gadget_from_imei2")
+@router.callback_query(F.data == "gadget_from_imei2", RoleFilter([1,2,3]))
 async def find_gadget_by_imei2_cl(call: types.CallbackQuery, state: FSMContext):
     await vld(o=call, u=call.from_user)
     await call.message.edit_text("Gatgetni IMEI2-ni kiriting:")

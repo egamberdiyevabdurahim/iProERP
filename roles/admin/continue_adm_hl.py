@@ -9,13 +9,13 @@ from utils.validator import vld
 router = Router()
 
 
-@router.callback_query(F.data.startswith('continue_'), RoleFilter([1, 2, 3]))
+@router.callback_query(F.data.startswith('continue_'), RoleFilter([1,2]))
 async def continue_cl(
         call: types.CallbackQuery,
         redirect=True,
         idn=None
 ):
-    u = await vld(o=call, u=call.from_user, delete=True)
+    await vld(o=call, u=call.from_user, delete=True)
     if not idn:
         idn = call.data.split("_")[1]
 

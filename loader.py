@@ -1,5 +1,3 @@
-import asyncio
-
 from aiogram import Dispatcher, Bot
 from aiogram.fsm.storage.memory import MemoryStorage
 # from aiogram.utils.i18n import I18n

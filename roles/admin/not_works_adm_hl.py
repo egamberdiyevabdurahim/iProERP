@@ -12,7 +12,7 @@ from utils.validator import vld
 router = Router()
 
 
-@router.callback_query(F.data.startswith('not-works_'), RoleFilter([1, 2, 3]))
+@router.callback_query(F.data.startswith('not-works_'), RoleFilter([1,2]))
 async def not_works_cl(
         call: types.CallbackQuery,
         state: FSMContext

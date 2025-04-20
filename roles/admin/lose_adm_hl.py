@@ -8,7 +8,7 @@ from utils.validator import vld
 router = Router()
 
 
-@router.callback_query(F.data.startswith('lose_'), RoleFilter([1, 2, 3]))
+@router.callback_query(F.data.startswith('lose_'), RoleFilter([1,2]))
 async def lose_cl(
         call: types.CallbackQuery
 ):

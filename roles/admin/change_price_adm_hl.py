@@ -9,7 +9,7 @@ from utils.validator import vld
 router = Router()
 
 
-@router.callback_query(F.data.startswith('change-price_'), RoleFilter([2, 3]))
+@router.callback_query(F.data.startswith('change-price_'), RoleFilter([2,3]))
 async def change_price_cl(
         call: types.CallbackQuery,
         state: FSMContext
