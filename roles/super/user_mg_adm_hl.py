@@ -39,7 +39,7 @@ async def register_role(message: types.Message, state: FSMContext):
 
     if role in [1, 3]:
         state_data = await state.get_data()
-        chat_id = state_data.get('idn')
+        chat_id = state_data.get('chat_id')
 
         await Account.create(
             chat_id=chat_id,
