@@ -34,7 +34,7 @@ async def change_price_gadgets_cl(
 
     start_index = (page - 1) * page_size
 
-    gadgets = await Gadget.get_all(
+    current_gadgets = await Gadget.get_all(
         ex="AND is_deleted is False",
         st=start_index,
         lt=page_size
@@ -46,7 +46,6 @@ async def change_price_gadgets_cl(
     text_data = f"-------------{page}/{total_pages}-------------\n"
 
     end_index = start_index + page_size
-    current_gadgets = gadgets[start_index:end_index]
 
     counter = end_index
     for gadget in current_gadgets:

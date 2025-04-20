@@ -17,7 +17,7 @@ async def get_work_cl(
     u = await vld(o=call, u=call.from_user)
 
     start_index = (page - 1) * page_size
-    gadgets = await Gadget.get_all(
+    current_gadgets = await Gadget.get_all(
         ex="AND status = 0",
         st=start_index,
         lt=page_size
@@ -33,7 +33,6 @@ async def get_work_cl(
     text_data = f"-------------{page}/{total_pages}-------------\n"
 
     end_index = start_index + page_size
-    current_gadgets = gadgets[start_index:end_index]
 
     counter = end_index
     for gadget in current_gadgets:
