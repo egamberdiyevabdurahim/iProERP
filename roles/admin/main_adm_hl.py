@@ -103,6 +103,9 @@ async def page_callback(call: types.CallbackQuery):
 
     page = call.data.split("_")[1]
     type_data = call.data.split("_")[2]
+    print("a"*200)
+    print(page)
+    print(type_data)
 
     if type_data == "my-jobs":
         await my_jobs_cl(call=call, page=int(page))

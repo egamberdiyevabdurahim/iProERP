@@ -35,6 +35,7 @@ async def change_price_gadgets_cl(
     start_index = (page - 1) * page_size
 
     gadgets = await Gadget.get_all(
+        ex="AND is_deleted is False",
         st=start_index,
         lt=page_size
     ) or []

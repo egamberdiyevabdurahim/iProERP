@@ -262,7 +262,7 @@ class GadgetModel:
         WHERE 1=1 {ex}
         """
         result = await execute_query(query, fetch='one')
-        return result[-1]
+        return result.get('counter')
 
     @classmethod
     async def get_all(cls, ex='', lt=None, st=None):
